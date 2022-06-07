@@ -1,0 +1,24 @@
+app:
+  name: "YOSAKURA"
+  mode: "dev"
+  port: ":8765"
+
+Mysql:
+  host: "127.0.0.1"
+  port: 3306
+  user: ""
+  password: ""
+  dbname: ""
+  max_open_conns: 200
+  max_idle_Conns: 50
+
+log:
+  level: "debug"
+  filename: "web.log"
+  max_size: 200
+  max_age: 39
+  max_backups: 9
+
+FOFA:
+  mail: ""
+  key: ""
