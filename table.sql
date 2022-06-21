@@ -1,4 +1,3 @@
-#用户信息表
 CREATE TABLE `user` (
                         `id` tinyint(4) NOT NULL AUTO_INCREMENT,
                         `username` varchar(16) NOT NULL,
@@ -11,7 +10,7 @@ CREATE TABLE `user` (
                         UNIQUE KEY `nikename` (`nikename`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-#任务表
+
 CREATE TABLE `task` (
                           `id` int NOT NULL AUTO_INCREMENT,
                           `taskName` varchar(32) NOT NULL,
@@ -23,7 +22,7 @@ CREATE TABLE `task` (
                           UNIQUE KEY `domain` (`domain`) USING BTREE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-#域名表
+
 CREATE TABLE `domain` (
                           `id` int NOT NULL AUTO_INCREMENT,
                           `domain` varchar(32) NOT NULL,
@@ -34,7 +33,7 @@ CREATE TABLE `domain` (
                           UNIQUE KEY `domain` (`domain`) USING BTREE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-#Whois表
+
 CREATE TABLE `whois` (
                          `id` int NOT NULL AUTO_INCREMENT,
                           `domain` varchar(32) NOT NULL,
@@ -44,7 +43,7 @@ CREATE TABLE `whois` (
                           UNIQUE KEY `domain` (`domain`) USING BTREE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-#子域名表
+
 CREATE TABLE `subdomain` (
                              `id` int NOT NULL AUTO_INCREMENT,
                              `domain` varchar(32) NOT NULL,
@@ -57,7 +56,7 @@ CREATE TABLE `subdomain` (
                              UNIQUE KEY `domain` (`subdomain`) USING BTREE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-#域名执行记录表
+
 CREATE TABLE `domainrecord` (
                              `id` int NOT NULL AUTO_INCREMENT,
                              `domain` varchar(32) NOT NULL,
@@ -65,6 +64,7 @@ CREATE TABLE `domainrecord` (
                              `icon` bool DEFAULT false,
                              `subdomain` bool DEFAULT false,
                              `cdn` bool DEFAULT false,
+                             `ipcheck` bool DEFAULT false,
                              `ipscan` bool DEFAULT false,
                              `finger` bool DEFAULT false,
                              `siteDirectory`  bool DEFAULT false,
@@ -74,20 +74,20 @@ CREATE TABLE `domainrecord` (
                              UNIQUE KEY `domain` (`domain`) USING BTREE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-#URL表
+
 CREATE TABLE `url` (
                             `id` int NOT NULL AUTO_INCREMENT,
                              `domain` varchar(32) NOT NULL,
                              `url` varchar(64) NOT NULL,
                              `type` varchar(16) NOT NULL,
-                             `finger` varchar(32) DEFAULT 'wait',
-                             `title` varchar(32) DEFAULT 'wait',
+                             `finger` varchar(256) DEFAULT 'wait',
+                             `title` varchar(256) DEFAULT 'wait',
                              `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
                              PRIMARY KEY (`id`),
                              UNIQUE KEY `domain` (`url`) USING BTREE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-#icon表
+
 CREATE TABLE `icon` (
                        `id` int NOT NULL AUTO_INCREMENT,
                        `domain` varchar(32) NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE `icon` (
                        UNIQUE KEY `domain` (`domain`) USING BTREE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-#IP表
+
 CREATE TABLE `ip` (
                        `id` int NOT NULL AUTO_INCREMENT,
                        `ip` varchar(16) NOT NULL,
@@ -107,3 +107,16 @@ CREATE TABLE `ip` (
                        PRIMARY KEY (`id`),
                        UNIQUE KEY `ip` (`ip`) USING BTREE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `ipRe` (
+                      `id` int NOT NULL AUTO_INCREMENT,
+                      `domain` varchar(32) NOT NULL,
+                      `ipRe` TEXT,
+                      `ipSe` TEXT,
+                      `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+                      PRIMARY KEY (`id`),
+                      UNIQUE KEY `ip` (`domain`) USING BTREE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO user(username,password,nikeName) values("m0sway","31323334353637383966d207c908e2fc24c807734b54b81946","陌生");
